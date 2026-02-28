@@ -667,6 +667,38 @@
     border-color: rgba(123,110,246,0.2);
   }
 
+  .project-links {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  .plink {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 6px 14px;
+    border: 1px solid var(--dim);
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+
+  .plink:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  .plink-primary {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .plink-primary:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
   /* ─── SKILLS ─── */
   .skills-section {
     background: var(--surface);
@@ -1055,60 +1087,54 @@
   <div class="section-header">
     <span class="section-tag">Projects</span>
     <h2>Things I've built.</h2>
-    <p>Add your own projects below — here are placeholders to get you started.</p>
   </div>
   <div class="projects-grid">
 
     <!-- FEATURED — DocMind -->
-    <a class="project-card featured" href="https://doc-mind-ai-document-q-a.vercel.app" target="_blank">
-      <div class="project-num" style="display:flex;justify-content:space-between;align-items:center;">
-        <span>01 — Featured · Live</span>
-        <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:3px 10px;" onmouseover="this.style.color='#4EFFC5';this.style.borderColor='#4EFFC5'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--dim)'">GitHub ↗</a>
-      </div>
+    <div class="project-card featured">
+      <div class="project-num">01 — Featured · Live</div>
       <div class="project-type">RAG System · Full Stack</div>
       <h3>DocMind — AI Document Q&A</h3>
       <p>Upload PDFs, ask questions in natural language, get accurate answers with page-level source citations. Supports 6 AI providers (Anthropic, OpenAI, Google, Mistral, Cohere, Groq) and 15+ models. Built with a FastAPI backend doing real RAG — chunking, embedding, and ChromaDB vector search — with a clean zero-dependency frontend. Users bring their own API key, keeping operating costs at zero.</p>
-      <div class="project-footer">
-        <div class="project-stack">
-          <span>FastAPI</span>
-          <span>LangChain</span>
-          <span>ChromaDB</span>
-          <span>Python</span>
-          <span>Railway</span>
-          <span>Vercel</span>
-        </div>
-        <div class="project-arrow">↗</div>
+      <div class="project-stack" style="margin-bottom:20px;">
+        <span>FastAPI</span>
+        <span>LangChain</span>
+        <span>ChromaDB</span>
+        <span>Python</span>
+        <span>Railway</span>
+        <span>Vercel</span>
       </div>
-    </a>
+      <div class="project-links">
+        <a href="https://doc-mind-ai-document-q-a.vercel.app" target="_blank" class="plink plink-primary">Live Demo ↗</a>
+        <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" class="plink">GitHub ↗</a>
+      </div>
+    </div>
 
     <!-- CARD 2 — Legal PI -->
-    <a class="project-card" href="https://github.com/kethanpabbi/PI-Compliance-tracker" target="_blank">
+    <div class="project-card">
       <div class="project-num">02</div>
       <div class="project-type">AI Application · React</div>
       <h3>Legal PI Case Manager</h3>
       <p>AI-powered case management platform for personal injury law firms. Features real PDF/DOCX text extraction in-browser, Claude-powered document analysis, a context-aware AI assistant with full case awareness, deadline tracking by urgency, and a document querying mode for deep-diving into specific files.</p>
-      <div class="project-footer">
-        <div class="project-stack">
-          <span>React</span>
-          <span>Claude API</span>
-          <span>pdf.js</span>
-          <span>Vite</span>
-        </div>
-        <div class="project-arrow">↗</div>
+      <div class="project-stack" style="margin-bottom:20px;">
+        <span>React</span>
+        <span>Claude API</span>
+        <span>pdf.js</span>
+        <span>Vite</span>
       </div>
-    </a>
+      <div class="project-links">
+        <a href="https://github.com/kethanpabbi/PI-Compliance-tracker" target="_blank" class="plink">GitHub ↗</a>
+      </div>
+    </div>
 
     <!-- CARD 3 — placeholder -->
-    <a class="project-card" href="#" style="border-style: dashed; opacity: 0.5; pointer-events:none;">
+    <div class="project-card" style="border-style:dashed;opacity:0.4;pointer-events:none;">
       <div class="project-num">03</div>
       <div class="project-type">Coming Soon</div>
       <h3>Next Project</h3>
       <p>More projects incoming. Building in public.</p>
-      <div class="project-footer">
-        <div class="project-stack"></div>
-        <div class="project-arrow">—</div>
-      </div>
-    </a>
+      <div class="project-links"></div>
+    </div>
 
   </div>
 </section>
