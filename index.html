@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — AI Engineer</title>
+<title>Kethan Pabbi — AI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -418,12 +418,6 @@
     flex-shrink: 0;
   }
 
-  .badge-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-  }
   .badge-title {
     font-family: 'Syne', sans-serif;
     font-size: 0.85rem;
@@ -873,7 +867,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">AI<span>.</span>Engineer</a>
+  <a href="#" class="nav-logo">KP<span>.</span>dev</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -1057,85 +1051,54 @@
   </div>
   <div class="projects-grid">
 
-    <!-- FEATURED -->
-    <a class="project-card featured" href="#">
-      <div class="project-num">01 — Featured</div>
-      <div class="project-type">AI Agent System</div>
-      <h3>Security Intelligence RAG Pipeline</h3>
-      <p>End-to-end RAG system for threat intelligence processing. Ingests unstructured security reports, chunks and embeds documents into a vector store, and uses LangGraph agents to answer structured queries — reducing analyst triage time significantly.</p>
+    <!-- FEATURED — DocMind -->
+    <a class="project-card featured" href="https://doc-mind-ai-document-q-a.vercel.app" target="_blank">
+      <div class="project-num">01 — Featured · Live</div>
+      <div class="project-type">RAG System · Full Stack</div>
+      <h3>DocMind — AI Document Q&A</h3>
+      <p>Upload PDFs, ask questions in natural language, get accurate answers with page-level source citations. Supports 6 AI providers (Anthropic, OpenAI, Google, Mistral, Cohere, Groq) and 15+ models. Built with a FastAPI backend doing real RAG — chunking, embedding, and ChromaDB vector search — with a clean zero-dependency frontend. Users bring their own API key, keeping operating costs at zero.</p>
       <div class="project-footer">
         <div class="project-stack">
-          <span>LangGraph</span>
-          <span>FastAPI</span>
-          <span>ChromaDB</span>
-          <span>GCP</span>
-          <span>Python</span>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
-
-    <!-- CARD 2 -->
-    <a class="project-card" href="#">
-      <div class="project-num">02</div>
-      <div class="project-type">Production ML</div>
-      <h3>Anomaly Detection Engine</h3>
-      <p>ML pipeline for detecting behavioural anomalies in high-volume security telemetry. Full lifecycle: data ingestion, feature engineering, model training, and deployment on GCP.</p>
-      <div class="project-footer">
-        <div class="project-stack">
-          <span>PyTorch</span>
-          <span>BigQuery</span>
-          <span>GCP</span>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
-
-    <!-- CARD 3 -->
-    <a class="project-card" href="#">
-      <div class="project-num">03</div>
-      <div class="project-type">Full-Stack AI App</div>
-      <h3>Your Next Project Here</h3>
-      <p>Replace this with your own project. Describe what problem it solves, how you built it, and the outcome. Keep it outcome-focused.</p>
-      <div class="project-footer">
-        <div class="project-stack">
-          <span>Next.js</span>
           <span>FastAPI</span>
           <span>LangChain</span>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
-
-    <!-- CARD 4 -->
-    <a class="project-card" href="#">
-      <div class="project-num">04</div>
-      <div class="project-type">Data Engineering</div>
-      <h3>Scalable ETL Framework</h3>
-      <p>Replace with your own project. Focus on impact metrics — rows processed, latency improvements, cost savings, whatever matters.</p>
-      <div class="project-footer">
-        <div class="project-stack">
+          <span>ChromaDB</span>
           <span>Python</span>
-          <span>BigQuery</span>
-          <span>SQL</span>
+          <span>Railway</span>
+          <span>Vercel</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:4px 10px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='var(--dim)';this.style.color='var(--muted)'">GitHub</a>
+          <div class="project-arrow">↗</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD 2 — Legal PI -->
+    <a class="project-card" href="https://github.com/kethanpabbi/PI-Compliance-tracker" target="_blank">
+      <div class="project-num">02</div>
+      <div class="project-type">AI Application · React</div>
+      <h3>Legal PI Case Manager</h3>
+      <p>AI-powered case management platform for personal injury law firms. Features real PDF/DOCX text extraction in-browser, Claude-powered document analysis, a context-aware AI assistant with full case awareness, deadline tracking by urgency, and a document querying mode for deep-diving into specific files.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>React</span>
+          <span>Claude API</span>
+          <span>pdf.js</span>
+          <span>Vite</span>
         </div>
         <div class="project-arrow">↗</div>
       </div>
     </a>
 
-    <!-- CARD 5 -->
-    <a class="project-card" href="#">
-      <div class="project-num">05</div>
-      <div class="project-type">LLM Application</div>
-      <h3>Add Your Project</h3>
-      <p>What have you built outside of work? Side projects, open source contributions, and experiments are great to showcase here.</p>
+    <!-- CARD 3 — placeholder -->
+    <a class="project-card" href="#" style="border-style: dashed; opacity: 0.5; pointer-events:none;">
+      <div class="project-num">03</div>
+      <div class="project-type">Coming Soon</div>
+      <h3>Next Project</h3>
+      <p>More projects incoming. Building in public.</p>
       <div class="project-footer">
-        <div class="project-stack">
-          <span>OpenAI API</span>
-          <span>FastAPI</span>
-          <span>React</span>
-        </div>
-        <div class="project-arrow">↗</div>
+        <div class="project-stack"></div>
+        <div class="project-arrow">—</div>
       </div>
     </a>
 
@@ -1213,19 +1176,24 @@
         Also open to conversations about applied GenAI, data engineering, or anything at the intersection of security and AI.
       </p>
       <div class="social-links">
-        <a href="https://linkedin.com" target="_blank" class="social-link">
+        <a href="https://www.linkedin.com/in/kethan-pabbi/" target="_blank" class="social-link">
           <span class="icon">in</span>
-          <span class="link-label">LinkedIn</span>
+          <span class="link-label">linkedin.com/in/kethan-pabbi</span>
           <span class="arrow">→</span>
         </a>
-        <a href="https://github.com" target="_blank" class="social-link">
+        <a href="https://github.com/kethanpabbi" target="_blank" class="social-link">
           <span class="icon">⌥</span>
-          <span class="link-label">GitHub</span>
+          <span class="link-label">github.com/kethanpabbi</span>
           <span class="arrow">→</span>
         </a>
-        <a href="mailto:your@email.com" class="social-link">
+        <a href="mailto:kethanpabbi@gmail.com" class="social-link">
           <span class="icon">@</span>
-          <span class="link-label">your@email.com — update this</span>
+          <span class="link-label">kethanpabbi@gmail.com</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="tel:+353894915039" class="social-link">
+          <span class="icon">✆</span>
+          <span class="link-label">+353 89 491 5039</span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -1234,13 +1202,13 @@
       <div class="contact-availability">
         <div class="avail-dot">Open to opportunities</div>
         <div class="avail-text">
-          Currently available for full-time roles, contract work, or interesting AI projects. Based in Cork, Ireland — open to remote.
+          Currently available for full-time roles, contract work, or interesting AI projects.
         </div>
       </div>
       <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--dim);letter-spacing:0.05em;line-height:1.8;">
         RESPONSE TIME — usually within 24 hours<br>
-        PREFERRED — email or LinkedIn DM<br>
-        LOCATION — Cork, Ireland / Remote
+        PREFERRED — Email or LinkedIn DM<br>
+        LOCATION — Ireland. Open to remote roles or relocation worldwide.
       </p>
     </div>
   </div>
@@ -1248,9 +1216,4 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 — Built with purpose, not a template.</p>
-  <p>AI ENGINEER · DATA SCIENTIST · CORK, IE</p>
-</footer>
-
-</body>
-</html>
+  <p>© 20
