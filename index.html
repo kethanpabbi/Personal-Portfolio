@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090f;
+    --surface: #0f0f1a;
+    --surface2: #15151f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #7B6EF6;
+    --accent2: #4EFFC5;
+    --accent3: #FF6B6B;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --dim: #3a3a4a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* Grid bg */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,110,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,110,246,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(9,9,15,0.7);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent2); }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 20px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent2);
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+
+  .hero h1 .line-accent {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(123,110,246,0.5);
+  }
+
+  .hero h1 .highlight {
+    position: relative;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: #6358d4;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    padding: 14px 32px;
+    border: 1px solid var(--dim);
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--text);
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Floating accent orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: rgba(123,110,246,0.12);
+    top: 10%; right: -100px;
+  }
+
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: rgba(78,255,197,0.06);
+    bottom: 20%; left: -50px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text);
+  }
+
+  .section-header p {
+    color: var(--muted);
+    margin-top: 12px;
+    max-width: 480px;
+    font-size: 0.95rem;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--surface);
+    max-width: 100%;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  #about .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 0.97rem;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-text .accent-line {
+    color: var(--accent2);
+    font-style: italic;
+  }
+
+  .about-stack-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .stack-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .stack-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .stack-item:hover {
+    border-color: var(--accent);
+    background: rgba(123,110,246,0.08);
+  }
+
+  /* Cybersecurity badge */
+  .domain-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .domain-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .badge-icon {
+    width: 36px; height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .badge-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+  .badge-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .badge-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--dim) 80%, transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 56px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px; top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px rgba(123,110,246,0.5);
+  }
+
+  .timeline-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timeline-company .dot {
+    width: 4px; height: 4px;
+    background: var(--dim);
+    border-radius: 50%;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .timeline-bullets li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    border: 1px solid var(--dim);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .project-card:hover {
+    background: var(--surface2);
+    transform: translateY(-2px);
+  }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .project-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .project-stack {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .project-stack span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 3px 8px;
+    background: rgba(123,110,246,0.1);
+    border: 1px solid rgba(123,110,246,0.2);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .project-arrow {
+    color: var(--dim);
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .project-card:hover .project-arrow {
+    color: var(--accent2);
+    transform: translate(3px, -3px);
+  }
+
+  /* Featured card */
+  .project-card.featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(123,110,246,0.08) 0%, var(--surface) 60%);
+    border-color: rgba(123,110,246,0.2);
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-section {
+    background: var(--surface);
+    max-width: 100%;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills-section .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  .skills-categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .skill-cat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skill-list li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: default;
+    transition: color 0.2s;
+  }
+
+  .skill-list li:hover { color: var(--text); }
+
+  .skill-list li .dot {
+    width: 4px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    font-size: 0.97rem;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+    background: var(--surface);
+  }
+
+  .social-link:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: rgba(123,110,246,0.05);
+  }
+
+  .social-link .icon {
+    font-size: 1.2rem;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .social-link .link-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .social-link .arrow {
+    margin-left: auto;
+    color: var(--dim);
+    transition: all 0.2s;
+  }
+
+  .social-link:hover .arrow { color: var(--accent2); transform: translateX(4px); }
+
+  /* Contact right */
+  .contact-availability {
+    padding: 32px;
+    border: 1px solid rgba(78,255,197,0.2);
+    background: rgba(78,255,197,0.04);
+    margin-bottom: 32px;
+  }
+
+  .avail-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .avail-dot::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .avail-text {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero h1 { animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-sub { animation: fadeUp 0.7s ease 0.35s both; }
+  .hero-actions { animation: fadeUp 0.7s ease 0.45s both; }
+  .hero-stats { animation: fadeUp 0.7s ease 0.55s both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, .hero { padding-left: 24px; padding-right: 24px; }
+    #about .inner, .skills-section .inner, footer { padding-left: 24px; padding-right: 24px; }
+    #about .inner { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .skills-categories { grid-template-columns: 1fr 1fr; }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { flex-wrap: wrap; gap: 28px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AI<span>.</span>Engineer</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" style="position:relative;">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-eyebrow">AI Engineer & Data Scientist</div>
+  <h1>
+    Building AI<br>
+    <span class="highlight">end‑to‑end.</span><br>
+    <span class="line-accent">From data to deploy.</span>
+  </h1>
+  <p class="hero-sub">
+    I build <strong>AI agents, RAG systems, and production ML pipelines</strong> — from raw data to deployed applications. Background in enterprise security analytics at Cybereason. <span style="color:var(--accent2)">MSc Data Science & Analytics, UCC.</span>
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">2.5<span style="color:var(--accent);font-size:1.2rem">+</span></span>
+      <span class="stat-label">Years at Cybereason</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:var(--accent2)">MSc</span>
+      <span class="stat-label">Data Science, 1st Class</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Domains Covered</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" style="color:var(--accent3)">∞</span>
+      <span class="stat-label">Problems to solve</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="inner">
+    <div class="about-text">
+      <div class="section-header">
+        <span class="section-tag">About Me</span>
+        <h2>I build AI systems that work in the real world.</h2>
+      </div>
+      <p>
+        I'm a <strong>Data Scientist and AI Engineer</strong> who has spent the last 2.5 years at Cybereason building production ML and AI systems for enterprise security analytics. My work sits at the intersection of <strong>applied AI, data engineering, and backend development</strong>.
+      </p>
+      <p>
+        My background spans <strong>LLM agents, RAG pipelines, anomaly detection, and scalable data infrastructure</strong> — all built for high-stakes environments where reliability and observability matter.
+      </p>
+      <p class="accent-line">
+        The cybersecurity context isn't incidental — it means I've built AI systems that operate on messy, high-volume, adversarial data. That sharpens everything.
+      </p>
+      <p>
+        I'm comfortable owning the full stack: from raw data to deployed model to API to dashboard. If there's a gap in a system, I'll fill it.
+      </p>
+    </div>
+    <div class="about-right">
+      <p class="about-stack-title">Core Stack</p>
+      <div class="stack-grid">
+        <div class="stack-item">Python</div>
+        <div class="stack-item">LangChain / LangGraph</div>
+        <div class="stack-item">PyTorch</div>
+        <div class="stack-item">FastAPI</div>
+        <div class="stack-item">GCP / BigQuery</div>
+        <div class="stack-item">SQL</div>
+        <div class="stack-item">Vector DBs</div>
+        <div class="stack-item">RAG Systems</div>
+      </div>
+      <p class="about-stack-title" style="margin-top:8px;">Domain Coverage</p>
+      <div class="domain-badges">
+        <div class="domain-badge">
+          <div class="badge-icon">🤖</div>
+          <div class="badge-content">
+            <div class="badge-title">AI Engineering</div>
+            <div class="badge-sub">Agents · RAG · LLM Pipelines · APIs</div>
+          </div>
+        </div>
+        <div class="domain-badge">
+          <div class="badge-icon">📊</div>
+          <div class="badge-content">
+            <div class="badge-title">Data Science & ML</div>
+            <div class="badge-sub">Anomaly Detection · Feature Engineering · Analytics</div>
+          </div>
+        </div>
+        <div class="domain-badge">
+          <div class="badge-icon">🔒</div>
+          <div class="badge-content">
+            <div class="badge-title">Security Analytics</div>
+            <div class="badge-sub">Enterprise Security · Threat Intelligence · SIEM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-tag">Experience</span>
+    <h2>Where I've built things.</h2>
+    <p>2.5 years progressing from Graduate Analyst to Data Scientist at a global cybersecurity company.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-meta">May 2024 — Feb 2026 · 1 yr 10 mos</div>
+      <div class="timeline-role">Data Scientist</div>
+      <div class="timeline-company">
+        Cybereason <span class="dot"></span> Cork, Remote
+      </div>
+      <ul class="timeline-bullets">
+        <li><strong>AI Agents:</strong> Built automated security workflows using LangChain / LangGraph for enterprise-scale threat analysis</li>
+        <li><strong>RAG Systems:</strong> Designed and implemented retrieval pipelines for threat intelligence processing over unstructured data</li>
+        <li><strong>LLM Integration:</strong> Developed production systems for search, summarization, and structured extraction at scale</li>
+        <li><strong>Production ML:</strong> End-to-end pipelines — raw data → feature engineering → anomaly detection → deployed models</li>
+        <li><strong>Data Engineering:</strong> Scalable GCP / BigQuery pipelines processing high-volume security telemetry</li>
+        <li><strong>APIs & Infrastructure:</strong> FastAPI backend services, Looker Studio dashboards, production deployment</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="tag">Python</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">LangGraph</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">GCP</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Vector DBs</span>
+        <span class="tag">RAG</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-meta">Sep 2023 — May 2024 · 9 mos</div>
+      <div class="timeline-role">Graduate Data Analyst</div>
+      <div class="timeline-company">
+        Cybereason <span class="dot"></span> Cork, Hybrid
+      </div>
+      <ul class="timeline-bullets">
+        <li><strong>Data Pipelines:</strong> Built and maintained ETL workflows processing security event data using Python and SQL</li>
+        <li><strong>Automation:</strong> Created scripts streamlining recurring data processing and reporting workflows</li>
+        <li><strong>Dashboards:</strong> Developed Looker Studio analytics dashboards for technical and business stakeholders</li>
+        <li><strong>Production Systems:</strong> Hands-on with GCP and production data infrastructure in an enterprise environment</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">GCP</span>
+        <span class="tag">Looker Studio</span>
+        <span class="tag">ETL</span>
+        <span class="tag">Analytics</span>
+      </div>
+    </div>
+    <div class="timeline-item" style="padding-bottom:0">
+      <div class="timeline-meta">Graduated 2023</div>
+      <div class="timeline-role">MSc Data Science & Analytics</div>
+      <div class="timeline-company">
+        University College Cork <span class="dot"></span> First Class Honours
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-tag">Projects</span>
+    <h2>Things I've built.</h2>
+    <p>Add your own projects below — here are placeholders to get you started.</p>
+  </div>
+  <div class="projects-grid">
+
+    <!-- FEATURED -->
+    <a class="project-card featured" href="#">
+      <div class="project-num">01 — Featured</div>
+      <div class="project-type">AI Agent System</div>
+      <h3>Security Intelligence RAG Pipeline</h3>
+      <p>End-to-end RAG system for threat intelligence processing. Ingests unstructured security reports, chunks and embeds documents into a vector store, and uses LangGraph agents to answer structured queries — reducing analyst triage time significantly.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>LangGraph</span>
+          <span>FastAPI</span>
+          <span>ChromaDB</span>
+          <span>GCP</span>
+          <span>Python</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- CARD 2 -->
+    <a class="project-card" href="#">
+      <div class="project-num">02</div>
+      <div class="project-type">Production ML</div>
+      <h3>Anomaly Detection Engine</h3>
+      <p>ML pipeline for detecting behavioural anomalies in high-volume security telemetry. Full lifecycle: data ingestion, feature engineering, model training, and deployment on GCP.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>PyTorch</span>
+          <span>BigQuery</span>
+          <span>GCP</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- CARD 3 -->
+    <a class="project-card" href="#">
+      <div class="project-num">03</div>
+      <div class="project-type">Full-Stack AI App</div>
+      <h3>Your Next Project Here</h3>
+      <p>Replace this with your own project. Describe what problem it solves, how you built it, and the outcome. Keep it outcome-focused.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>Next.js</span>
+          <span>FastAPI</span>
+          <span>LangChain</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- CARD 4 -->
+    <a class="project-card" href="#">
+      <div class="project-num">04</div>
+      <div class="project-type">Data Engineering</div>
+      <h3>Scalable ETL Framework</h3>
+      <p>Replace with your own project. Focus on impact metrics — rows processed, latency improvements, cost savings, whatever matters.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>Python</span>
+          <span>BigQuery</span>
+          <span>SQL</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- CARD 5 -->
+    <a class="project-card" href="#">
+      <div class="project-num">05</div>
+      <div class="project-type">LLM Application</div>
+      <h3>Add Your Project</h3>
+      <p>What have you built outside of work? Side projects, open source contributions, and experiments are great to showcase here.</p>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span>OpenAI API</span>
+          <span>FastAPI</span>
+          <span>React</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="inner">
+    <div class="section-header">
+      <span class="section-tag">Skills</span>
+      <h2>What I work with.</h2>
+    </div>
+    <div class="skills-categories">
+      <div>
+        <div class="skill-cat-title">AI / LLM</div>
+        <ul class="skill-list">
+          <li><span class="dot"></span>LangChain / LangGraph</li>
+          <li><span class="dot"></span>RAG Architecture</li>
+          <li><span class="dot"></span>Vector Databases</li>
+          <li><span class="dot"></span>Prompt Engineering</li>
+          <li><span class="dot"></span>AI Agents</li>
+          <li><span class="dot"></span>OpenAI / Anthropic APIs</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skill-cat-title">ML & Data Science</div>
+        <ul class="skill-list">
+          <li><span class="dot"></span>PyTorch</li>
+          <li><span class="dot"></span>Anomaly Detection</li>
+          <li><span class="dot"></span>Feature Engineering</li>
+          <li><span class="dot"></span>Statistical Modelling</li>
+          <li><span class="dot"></span>Scikit-learn</li>
+          <li><span class="dot"></span>Exploratory Analysis</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skill-cat-title">Engineering</div>
+        <ul class="skill-list">
+          <li><span class="dot"></span>Python</li>
+          <li><span class="dot"></span>FastAPI / REST APIs</li>
+          <li><span class="dot"></span>SQL / BigQuery</li>
+          <li><span class="dot"></span>GCP</li>
+          <li><span class="dot"></span>ETL Pipelines</li>
+          <li><span class="dot"></span>Docker</li>
+        </ul>
+      </div>
+      <div>
+        <div class="skill-cat-title">Domains</div>
+        <ul class="skill-list">
+          <li><span class="dot"></span>Enterprise Security</li>
+          <li><span class="dot"></span>Threat Intelligence</li>
+          <li><span class="dot"></span>Security Analytics</li>
+          <li><span class="dot"></span>Data Observability</li>
+          <li><span class="dot"></span>Looker Studio</li>
+          <li><span class="dot"></span>Agile Delivery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-tag">Contact</span>
+    <h2>Let's work together.</h2>
+  </div>
+  <div class="contact-wrapper">
+    <div class="contact-text">
+      <p>
+        I'm interested in roles building <strong>AI agents, LLM applications, or production ML systems</strong> — especially where the work is technically deep and the stakes are real.
+      </p>
+      <p>
+        Also open to conversations about applied GenAI, data engineering, or anything at the intersection of security and AI.
+      </p>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank" class="social-link">
+          <span class="icon">in</span>
+          <span class="link-label">LinkedIn</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="social-link">
+          <span class="icon">⌥</span>
+          <span class="link-label">GitHub</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="mailto:your@email.com" class="social-link">
+          <span class="icon">@</span>
+          <span class="link-label">your@email.com — update this</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="contact-availability">
+        <div class="avail-dot">Open to opportunities</div>
+        <div class="avail-text">
+          Currently available for full-time roles, contract work, or interesting AI projects. Based in Cork, Ireland — open to remote.
+        </div>
+      </div>
+      <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--dim);letter-spacing:0.05em;line-height:1.8;">
+        RESPONSE TIME — usually within 24 hours<br>
+        PREFERRED — email or LinkedIn DM<br>
+        LOCATION — Cork, Ireland / Remote
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 — Built with purpose, not a template.</p>
+  <p>AI ENGINEER · DATA SCIENTIST · CORK, IE</p>
+</footer>
+
+</body>
+</html>
