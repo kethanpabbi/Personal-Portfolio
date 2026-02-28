@@ -1061,7 +1061,10 @@
 
     <!-- FEATURED — DocMind -->
     <a class="project-card featured" href="https://doc-mind-ai-document-q-a.vercel.app" target="_blank">
-      <div class="project-num">01 — Featured · Live</div>
+      <div class="project-num" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>01 — Featured · Live</span>
+        <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:3px 10px;" onmouseover="this.style.color='#4EFFC5';this.style.borderColor='#4EFFC5'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--dim)'">GitHub ↗</a>
+      </div>
       <div class="project-type">RAG System · Full Stack</div>
       <h3>DocMind — AI Document Q&A</h3>
       <p>Upload PDFs, ask questions in natural language, get accurate answers with page-level source citations. Supports 6 AI providers (Anthropic, OpenAI, Google, Mistral, Cohere, Groq) and 15+ models. Built with a FastAPI backend doing real RAG — chunking, embedding, and ChromaDB vector search — with a clean zero-dependency frontend. Users bring their own API key, keeping operating costs at zero.</p>
@@ -1074,10 +1077,7 @@
           <span>Railway</span>
           <span>Vercel</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:center;flex-shrink:0;">
-          <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:4px 10px;white-space:nowrap;" onmouseover="this.style.borderColor='#4EFFC5';this.style.color='#4EFFC5'" onmouseout="this.style.borderColor='var(--dim)';this.style.color='var(--muted)'">GitHub</a>
-          <div class="project-arrow">↗</div>
-        </div>
+        <div class="project-arrow">↗</div>
       </div>
     </a>
 
