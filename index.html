@@ -564,7 +564,8 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .project-card::before {
@@ -619,12 +620,16 @@
     color: var(--muted);
     line-height: 1.65;
     margin-bottom: 24px;
+    flex: 1;
   }
 
   .project-footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: auto;
   }
 
   .project-stack {
@@ -1069,8 +1074,8 @@
           <span>Railway</span>
           <span>Vercel</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:center;">
-          <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:4px 10px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='var(--accent2)'" onmouseout="this.style.borderColor='var(--dim)';this.style.color='var(--muted)'">GitHub</a>
+        <div style="display:flex;gap:12px;align-items:center;flex-shrink:0;">
+          <a href="https://github.com/kethanpabbi/DocMind---AI-Document-Q-A" target="_blank" onclick="event.stopPropagation()" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-decoration:none;border:1px solid var(--dim);padding:4px 10px;white-space:nowrap;" onmouseover="this.style.borderColor='#4EFFC5';this.style.color='#4EFFC5'" onmouseout="this.style.borderColor='var(--dim)';this.style.color='var(--muted)'">GitHub</a>
           <div class="project-arrow">↗</div>
         </div>
       </div>
